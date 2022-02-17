@@ -1,0 +1,23 @@
+# Some commands we have used, 
+
+# CERTIFICATES
+
+# See also opcua-asynciao's "examples/generate_certificate.sh"
+
+# What we used to generate the Server's private key and certificate 
+
+$openssl req -x509 -newkey rsa:4096 -sha256 -keyout opcuaServer_private_key.pem -out opcuaServer_cert.pem -days 3650 -nodes -addext "subjectAltName = URI:urn:freeopcua:python:server"
+
+$openssl x509 -outform der -in opcuaServer_cert.pem -out opcuaServer_cert.der
+
+#  Generation of the clients private key and certificate
+$openssl req -x509 -newkey rsa:4096 -sha256 -keyout opcuaClient_private_key.pem -out opcuaClient_cert.pem -days 3650 -nodes -addext "subjectAltName = URI:urn:freeopcua:client"
+
+$openssl x509 -outform der -in opcuaClient_cert.pem -out opcuaClient_cert.der
+
+# A command to read a .der format certificate
+$openssl x509 -inform der -in <certificate_name>.der -noout -text
+
+# PANDOC, from markdown (.md) to .pdf
+$tail -n +2 README.md | pandoc -s -V papersize:a4 -o README.pdf 
+
