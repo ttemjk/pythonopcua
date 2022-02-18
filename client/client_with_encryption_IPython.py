@@ -40,32 +40,24 @@ async def task(loop):
     async with client:
         await  embed(using='asyncio')
 
-    # If connected to server_with_method.py, you can try these from the Ipython
-    # command line:     
+    # If connected to server, you can try these from the Ipython
+    # command line (<namespace> can be "0"):     
     # objects = client.nodes.objects
-    # obj = await client.nodes.root.get_child(["0:Objects", "0:MyObject"])
-    # await obj.call_method("0:mymethod", 2)
+    # obj = await client.nodes.root.get_child(["<namespace>:Objects", \
+    # "<namespace>:<ObjectName>"])
+    # await obj.call_method("<namespace>:<method_name>", <argument_values>)
 
-    # If the argument is "2" as above, the method in server returns "True",
-    # and "False" otherwise.
     # A bit longer method call:
-    # await obj.call_method("0:mymethod", ua.Variant(2, ua.VariantType.Int64))
+    # await obj.call_method("0:<method_name>", ua.Variant(<value>, \
+    # ua.VariantType.<type, see uatypes.py, e.g. Int64>))
+    # uatypes.py can be found in:
+    # "https://github.com/FreeOpcUa/opcua-asyncio/blob/master/asyncua/ua/uatypes.py"
 
-    # You can also read a varialbe (with value 2001.0):
-    # child = await objects.get_child(['0:MyObject', '0:MyVariable'])
+    # You can also read a variable:
+    # child = await objects.get_child(['<namespace>:<object_name>', \
+    # '<namespace>:<variable_name>'])
     # print(await child.get_value())
     
-
-    # With server server_with_encryption.py yYou can try these from the
-    # IPython command line:
-    # (Note that the server increments the variable with 0.1
-    # in 1 sec periods!)
-        #objects = client.nodes.objects
-        #child = await objects.get_child(['0:MyObject', '0:MyVariable'])
-        #print(await child.get_value())
-        #await child.set_value(4.2) # Must be decimal! 
-        #print(await child.get_value())
-
 
 def main():
     loop = asyncio.get_event_loop()
