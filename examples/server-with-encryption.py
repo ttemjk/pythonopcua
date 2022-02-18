@@ -9,33 +9,26 @@ from asyncua.crypto.permission_rules import SimpleRoleRuleset
 from asyncua.server.users import UserRole
 from asyncua.server.user_managers import CertificateUserManager
 
-logging.basicConfig(level=logging.DEBUG)
+logging.basicConfig(level=logging.INFO)
 
 
 async def main():
 
     cert_user_manager = CertificateUserManager()
-    await cert_user_manager.add_admin("certificates/opcuaClient_cert.der", name='test_user')
+    await cert_user_manager.add_user("certificates/peer-certificate-example-1.der", name='test_user')
 
     server = Server(user_manager=cert_user_manager)
 
     await server.init()
 
     server.set_endpoint("opc.tcp://0.0.0.0:4840/freeopcua/server/")
-    server.set_security_policy([ua.SecurityPolicyType.Basic256Sha256_SignAndEncrypt], permission_ruleset=SimpleRoleRuleset())
-    
-    #server.set_security_policy([ua.SecurityPolicyType.Basic256Sha256_SignAndEncrypt],)
-    
-
-
+    server.set_security_policy([ua.SecurityPolicyType.Basic256Sha256_SignAndEncrypt],
+                               permission_ruleset=SimpleRoleRuleset())
     # load server certificate and private key. This enables endpoints
     # with signing and encryption.
 
-#    await server.load_certificate("certificate-example.der")
-#    await server.load_private_key("private-key-example.pem")
-
-    await server.load_certificate("opcuaServer_cert.der")
-    await server.load_private_key("opcuaServer_private_key.pem")
+    await server.load_certificate("certificate-example.der")
+    await server.load_private_key("private-key-example.pem")
 
     idx = 0
 
@@ -55,7 +48,5 @@ async def main():
 
 
 if __name__ == "__main__":
-    #logging.basicConfig(level=logging.INFO)
-    logging.basicConfig(level=logging.DEBUG)
-
+    logging.basicConfig(level=logging.INFO)
     asyncio.run(main())
