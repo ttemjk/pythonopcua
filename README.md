@@ -20,8 +20,10 @@ This is an collection of example programs and auxiliary files, like
 certificates and keys, for demonstrating the use of
 FreeOpcUa python realisation of OPC-UA protocol for making queries of TPM data.
 
-The FreeOpcUa web-site:
-<https://github.com/FreeOpcUa>
+The FreeOpcUa web-site: <https://github.com/FreeOpcUa>
+
+Our  proof-of-concept has benefited from the examples given in the
+FreeOpcUa web-site, and we wish to thank their authors as well as the creators of the FreeOpcUa. 
 
 # Installation
 
@@ -59,21 +61,8 @@ give the command:
      $python3 client_with_encryption_IPython.py
 
 When launched, the client offers an IPython prompt. Using it 
-commands can be given, or loaded from a file with `"%load <filename>"`, like
-this:
-
-    # If connected to server_with_method.py, you can try these from the Ipython
-    # command line:
-
-    # objects = client.nodes.objects
-    # obj = await client.nodes.root.get_child(["0:Objects", "0:MyObject"])
-    # await obj.call_method("0:mymethod", 2)
-
-    # If the argument is "2" as above, the method in server returns "True",
-    # and "False" otherwise.
-    # You can also read a varialbe (with value 2001.0):
-    # child = await objects.get_child(['0:MyObject', '0:MyVariable'])
-    # print(await child.get_value())
+commands can be given, or loaded from a file with `"%load <filename>"`.
+See the file `"attest.py"`, intended to be loaded into the above client for requesting attestation from server `"server_with_attest_method.py"`. 
 
 The session can be terminated by giving IPython the command "exit".
 When the client subsequently exits you will get this error message: 
