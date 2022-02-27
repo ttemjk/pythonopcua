@@ -35,30 +35,36 @@ with approriate modifications.
 
 First, make sure that you have python3 >= 3.7, IPython3 and pip3.
 We have used the software packaged by Debian (for IPython the package
-is python3-ipython and for pip3 python3-pip). 
+is python3-ipython and for pip3 python3-pip).
+
+For Ubuntu 20.04 LTS install the following packages:
+
+        $ sudo apt install git python3-pip ipython3
 
 Then, use pip3 to install FreePpcUa opcua-asyncua:
 
-	$pip3 install asyncua
-	$pip3 install nest_asyncio
+	$ pip3 install asyncua
+	$ pip3 install nest_asyncio
 
 The files that are specific to our example are in a .zip file together with
 this README file.
 
 When unzipped, OPCUA.zip will create a directory "OPCUA" together with
-subdirectories.
+subdirectories. Use the following command to clone from git:
+
+        $ git clone git@gitlab.vtt.fi:cyfa/pythonopcua.git
 
 # Usage
 
 Launching the server/client: Open a terminal window and Go to the directory
 where server resides, and issue:
 
-      $python3 server_with_attest_method.py
+      $ python3 server_with_attest_method.py
 	  
 Then open another terminal window, go to the location of the client and
 give the command:
 
-     $python3 client_with_encryption_IPython.py
+      $ python3 client_with_encryption_IPython.py
 
 When launched, the client offers an IPython prompt. Using it 
 commands can be given, or loaded from a file with `"%load <filename>"`.
