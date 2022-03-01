@@ -26,10 +26,10 @@ async def attest_async(parent, variant):
     # Attestation takes time, so asyncronous function is justified.
     print("Attesting, estimated time 1 second")
     # This is just a simulation, so no real attestation is invoked.
-    await asyncio.sleep(1)
+    await asyncio.sleep(2)
     # Instead of attestation result we just return the client's nonce.
     ret = variant
-    return [ua.Variant(ret, ua.VariantType.String)]
+    return [ua.Variant(ret, ua.VariantType.ByteString)]
 
     
 async def main():
@@ -71,7 +71,7 @@ async def main():
     myvar = await myobj.add_variable(idx, "MyVariable", 2001.0)
     await myvar.set_writable()  # Set MyVariable to be writable by clients
 
-    await myobj.add_method(idx, "attest", attest_async, [ua.VariantType.String], [ua.VariantType.String])
+    await myobj.add_method(idx, "attest", attest_async, [ua.VariantType.ByteString], [ua.VariantType.ByteString])
     
     # starting!
 
